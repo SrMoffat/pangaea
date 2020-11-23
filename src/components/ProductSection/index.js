@@ -1,6 +1,7 @@
 import ProductItem from "../Product";
 
-const ProductSection = () => {
+const ProductSection = (props) => {
+    const { products } = props;
     const productSectionStyles = {
         backgroundColor: "#e3e8e5", 
         height: 500, 
@@ -8,7 +9,11 @@ const ProductSection = () => {
     };
     return (
         <div style={productSectionStyles}>
-            <ProductItem />
+        {
+            products && products.map(product => {
+                return  <ProductItem  product={product}/>
+            })
+        }
         </div>
     );
 };
