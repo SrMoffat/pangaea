@@ -5,7 +5,8 @@ const ProductSection = (props) => {
     const productSectionStyles = {
         backgroundColor: "#e3e8e5", 
         height: 500, 
-        padding: 60
+        padding: 60,
+        overflowY: "scroll"
     };
     return (
         <div style={productSectionStyles}>
