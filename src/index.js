@@ -1,12 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ApolloProvider } from 'react-apollo';
+import { ApolloClient, InMemoryCache } from 'apollo-boost';
+import { createHttpLink } from "apollo-link-http";
 
-import '../src/styles/index.css';
-import App from '../src/components/App';
+import App from './components/App';
+
+import './styles/index.css';
+
+const httpLink = createHttpLink({
+  uri: 'https://pangaea-interviews.now.sh/api/graphql'
+});
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache()
+});
 
 ReactDOM.render(
-  <React.StrictMode>
+  <ApolloProvider client={client}>
     <App />
-  </React.StrictMode>,
+  </ApolloProvider>,
   document.getElementById('root')
 );

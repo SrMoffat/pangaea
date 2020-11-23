@@ -1,0 +1,50 @@
+.nav {
+    padding: 8px;
+    padding-bottom: 12px;
+    display: grid;
+    grid-template-columns: 220px 400px 1fr;
+    border-bottom: 1px solid #dedede;
+}
+.nav-options {
+    display: grid;
+    grid-template-columns: 80px 80px 80px;
+    place-items: center;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+.logo {
+    height: 44px;
+    width: 154px;
+    justify-self: center;
+    cursor: pointer;
+}
+.cart {
+    height: 24px;
+    width: 26px;
+    cursor: pointer;
+}
+.cart-section {
+    padding-right: 25px;
+    font-size: 14px;
+    place-items: center;
+    justify-content: end;
+    display: grid;
+    grid-template-columns: 60px 50px 70px;
+    cursor: pointer;
+}
+.cart-item-count {
+    vertical-align: 16px;
+    margin-left: 3px;
+}
+.language-selector {
+    width: 60px;
+    height: 32px;
+    user-select: none;
+    outline: none;
+    padding: 7px;
+    border-radius: 0px;
+    border: 1px solid #dedede;
+    cursor: pointer;
+}
