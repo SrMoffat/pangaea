@@ -1,0 +1,119 @@
+.drawer {
+    height: 97vh;
+    width: 510px;
+    padding: 10px 20px;
+    position: absolute;
+    right: 0;
+    background-color: rgb(243, 243, 243);
+    display: grid;
+    grid-template-rows: 50px 40px 1fr 1fr;
+}
+.drawer-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+    margin-bottom: 10px;
+    align-self: start;
+}
+.drawer-title {
+    justify-self: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500;
+    color: #858585;
+}
+.close-side-bar {
+    padding: 5px;
+    height: 15px;
+    width: 15px;
+    border-radius: 100px;
+    border: 1px solid rgb(207, 207, 207);
+    justify-self: start;
+    cursor: pointer;
+}
+.close-side-bar:hover {
+    border: 1px solid #e7e7e7;
+}
+.currency-selection {
+    width: 70px;
+    padding: 10px;
+    border: none;
+    justify-self: start;
+    align-self: start;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+}
+.checkout-section {
+    display: grid;
+    align-self: end;
+    border: 1px solid rgb(199, 199, 199);
+    height: 150px;
+    padding: 15px;
+}
+.checkout-button {
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    border: none;
+    padding: 15;
+    background-color: rgb(75, 85, 72);
+    color: #ffffff;
+    min-width: 200px;
+    min-height: 52px;
+    text-align: center;
+    align-self: end;
+    text-transform: uppercase;
+}
+.checkout-product {
+    padding: 20px;
+    margin-top: 10px;
+    height: 110px;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    overflow-y: scroll;
+}
+.checkout-product-details {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-items: start;
+    font-size: 14px;
+}
+.checkout-product-name {
+    font-weight: bold;
+}
+.checkout-product-meta {
+    font-size: 12px;
+}
+.checkout-produxt-price {
+    align-self: end;
+    margin-bottom: 10px;
+    color: #4d4d4d;
+    font-size: 14px;
+}
+.checkout-product-image {
+    height: 80px;
+    width: 80px;
+}
+.total {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.subtotal-title {
+    justify-self: start;
+    font-size: 14px;
+    color: #4d4d4d;
+}
+.subtotal-amount {
+    justify-self: end;
+    font-weight: bold;
+    font-size: 16px;
+}
+.quantity-control {
+    padding: 8px 5px;
+    border: 1px solid rgb(209, 209, 209);
+    width: 70px;
+    display: grid;
+    grid-template-columns: 20px 1fr 20px;
+}
