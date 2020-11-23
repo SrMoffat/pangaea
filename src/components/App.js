@@ -1,5 +1,5 @@
 import NavBar from "./NavBar";
-import ProductItem from "./Product";
+import ProductSection from "./ProductSection";
 import FilterSection from "./FilterSection";
 import Footer from "./Footer";
 
@@ -11,9 +11,7 @@ function App() {
     <div className="App">
       <NavBar />
       <FilterSection />
-      <div style={{ backgroundColor: "#e3e8e5", height: 500, padding: 60 }}>
-        <ProductItem />
-      </div>
+      <ProductSection />
     </div>
   );
 }
