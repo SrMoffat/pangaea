@@ -12,6 +12,7 @@ function App() {
       <NavBar />
       <FilterSection />
       <ProductSection />
+      <Footer />
     </div>
   );
 }
