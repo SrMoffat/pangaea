@@ -2,11 +2,16 @@
     height: 97vh;
     width: 510px;
     padding: 10px 20px;
-    position: absolute;
+    position: fixed;
+    top: 0;
     right: 0;
+    /* right: -547px;  */
     background-color: rgb(243, 243, 243);
     display: grid;
     grid-template-rows: 50px 40px 1fr 1fr;
+    animation: all 3s;
+    transition: left .5s cubic-bezier(0.820, 0.085, 0.395, 0.895);
+    overflow-y: scroll;
 }
 .drawer-header {
     display: grid;
@@ -14,6 +19,10 @@
     place-items: center;
     margin-bottom: 10px;
     align-self: start;
+    position: sticky;
+    top: -10px;
+    background-color: rgb(238, 238, 238);
+    padding: 5px;
 }
 .drawer-title {
     justify-self: center;
@@ -43,6 +52,11 @@
     cursor: pointer;
     user-select: none;
     outline: none;
+    position: sticky;
+    top: 39px;
+    border: 1px solid rgb(226, 226, 226);
+    background-color: rgb(238, 238, 238);
+
 }
 .checkout-section {
     display: grid;
@@ -50,6 +64,11 @@
     border: 1px solid rgb(199, 199, 199);
     height: 150px;
     padding: 15px;
+    margin-top: 20px;
+    position: sticky;
+    bottom: -10px;
+    background-color: rgb(243, 243, 243);
+
 }
 .checkout-button {
     cursor: pointer;

@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { CartContext } from "../../state";
+
+
 const Product = (props) => {
+    const { state: { cart }, dispatch } = useContext(CartContext);
     const currency = "KES"
     const { product, setShowDrawer } = props;
     const { title, image_url, price } = product;
@@ -25,7 +30,12 @@ const Product = (props) => {
     const handleAddToCart = () => {
         const selectedItem = { ...product };
         setShowDrawer(true);
+        dispatch({
+            type: "ADD_ITEM",
+            payload: selectedItem
+        });
     };
+    console.log("STATE", cart);
 
     return (
         <div>

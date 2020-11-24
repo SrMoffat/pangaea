@@ -4,6 +4,9 @@
     display: grid;
     grid-template-columns: 220px 400px 1fr;
     border-bottom: 1px solid #dedede;
+    position: sticky;
+    top: 0;
+    background-color: #f5f5f5;
 }
 .nav-options {
     display: grid;

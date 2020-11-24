@@ -5,6 +5,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { createHttpLink } from "apollo-link-http";
 
 import App from './components/App';
+import { ProductsContextProvider, CurrencyContextProvider, CartContextProvider } from "../src/state";
 
 import './styles/index.css';
 
@@ -19,7 +20,13 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+    <CartContextProvider>
+      <ProductsContextProvider>
+        <CurrencyContextProvider>
+          <App />   
+        </CurrencyContextProvider>
+      </ProductsContextProvider>
+    </CartContextProvider>
   </ApolloProvider>,
   document.getElementById('root')
 );

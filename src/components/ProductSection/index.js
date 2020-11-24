@@ -1,10 +1,15 @@
+import { useContext } from "react";
+
 import ProductItem from "../Product";
 import Loader from "../Loader";
 
+import { ProductsContext } from "../../state";
+
 const ProductSection = (props) => {
-    const { products, loading, setShowDrawer } = props;
+    const { state: { products } } = useContext(ProductsContext);
+    const { loading, setShowDrawer } = props;
     const productSectionStyles = {
-        backgroundColor: "#e3e8e5", 
+        backgroundColor: "#f5f5f5", 
         height: 500, 
         padding: 60,
         overflowY: "scroll",

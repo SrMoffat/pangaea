@@ -1,7 +1,5 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-
-import { fetchProductsQuery } from "../graphql/queries";
 
 import NavBar from "./NavBar";
 import ProductSection from "./ProductSection";
@@ -9,25 +7,42 @@ import FilterSection from "./FilterSection";
 import SideDrawer from "./Drawer";
 import Footer from "./Footer";
 
+import { fetchProductsQuery, fetchCurrencyQuery } from "../graphql/queries";
+
+import { ProductsContext, CurrencyContext } from "../state";
+
 
 import '../styles/App.css';
 
 function App() {
   const { loading, data } = useQuery(fetchProductsQuery);
-  const [showDrawer, setShowDrawer] = useState(); // TODO: Use ContextAPI to avoid prop drilling
-  console.log("Clicked", showDrawer);
-
-
+  const { loading: currencyLoading, data: currencyData } = useQuery(fetchCurrencyQuery);
+  const [showDrawer, setShowDrawer] = useState();
+  const { state, dispatch } = useContext(ProductsContext);
+  const { state: currencyState, dispatch: currencyDispatch } = useContext(CurrencyContext);
   const products = data && data.products;
+  const currencies = currencyData && currencyData.currency;
+  useEffect(() => {
+    dispatch({
+      type: "FETCH_PRODUCTS",
+      payload: products
+    });
+  }, [products, dispatch]);
+  useEffect(() => {
+    currencyDispatch({
+      type: "FETCH_CURRENCIES",
+      payload: currencies
+    });
+  }, [currencies, currencyDispatch]);
   return (
     <div className="App">
       <div className="App">
-        <NavBar />
+        <NavBar setShowDrawer={setShowDrawer}/>
         <FilterSection />
-        <ProductSection products={products} loading={loading} setShowDrawer={setShowDrawer} />
+        <ProductSection loading={loading} setShowDrawer={setShowDrawer} />
         <Footer />
         {
-          showDrawer && <SideDrawer />
+          showDrawer && <SideDrawer currencyLoading={currencyLoading} setShowDrawer={setShowDrawer}/>
         }
       </div>
     </div>
