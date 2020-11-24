@@ -12,12 +12,10 @@ export const CartReducer = (state, action) => {
     const { type, payload } = action;
     switch(type){
         case "ADD_ITEM":
-        const newState = [...state.cart, payload];
-        const newn = {
-            cart: newState
-        };
-        console.log("NEW", newn);
-            return newn;
+            const newState = {
+                cart: [...state.cart, payload]
+            };
+            return newState;
         case "REMOVE_ITEM":
             return { ...state, payload }
         default:
