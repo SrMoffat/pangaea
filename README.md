@@ -26,7 +26,8 @@ This project is a medium fidelity clone of the [Lumin Site's](https://store.lumi
 - [] Clicking the + or - buttons will increase or descrease the quantity
 - [] If the quantity is 1 and the "-" button is pressed it should remove the item
 - [] In the top left there is a currency select, doing so should requery the GraphQL api with a new currency and update the prices
-- [] It should sum the items in the cart and display them in the correct selected currency
+- [x] It should sum the items in the cart 
+- [] It should display the sum of items in the correct selected currency
 - [] For screens `> 768px` show grid of `3 items` for `< 768px` show `2 items`
 
 ### Stretch

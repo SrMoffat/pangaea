@@ -9,7 +9,7 @@ const SideDrawer = (props) => {
     const { setShowDrawer } = props;
     const calculateSubTotal = cart => {
         const priceReducer = (accumulator, currentValue) => accumulator + currentValue;
-        return (cart.map(({price}) => price)).reduce(priceReducer);
+        return (cart.map(({price}) => price)).reduce(priceReducer, 0);
     };
     return (
         <div>
@@ -30,7 +30,7 @@ const SideDrawer = (props) => {
                     }
                 </select>
                 {
-                    cart && cart.map(({ title, price }, index) => (
+                    cart && cart.map(({ title, price, image_url }, index) => (
                         <div className="checkout-product" key={`${index}-checkout-product`}>
                             <div className="checkout-product-details">
                                 <div className="checkout-product-name">{ title }</div>
@@ -45,7 +45,7 @@ const SideDrawer = (props) => {
                                 <div>{`AMD ${price}`}</div>
                             </div>
                             <div>
-                                <img className="checkout-product-image" alt="checkout-product" src="https://i.shgcdn.com/aaef22bc-bf48-4e0d-81c2-482265460220/-/format/auto/-/preview/3000x3000/-/quality/lighter/" />
+                                <img className="checkout-product-image" alt="checkout-product" src={image_url} />
                             </div>
                         </div>
                     ))
