@@ -11,3 +11,9 @@ export const fetchProductsQuery = gql`
         }
     }
 `;
+
+export const fetchCurrencyQuery = gql`
+    query fetchCurrencyQuery {
+        currency 
+    }
+`;
