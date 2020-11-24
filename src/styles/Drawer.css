@@ -101,6 +101,7 @@
 }
 .checkout-product-name {
     font-weight: bold;
+    text-align: left;
 }
 .checkout-product-meta {
     font-size: 12px;

@@ -13,6 +13,10 @@ const SideDrawer = (props) => {
                 <div className="drawer-header">
                     <img onClick={() => setShowDrawer(false)} className="close-side-bar" alt="close-side-bar" src="../../closeside.png"/>
                     <p className="drawer-title">Your Cart</p>
+                    <div style={{ justifySelf: "end" }}>
+                        <img className="cart" alt="cart" src="../../../cart.png" />
+                        <span className="cart-item-count">{cart && cart.length}</span>
+                    </div>
                 </div>
                 <select className="currency-selection" name="currency-selection">
                     {

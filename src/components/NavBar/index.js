@@ -1,4 +1,5 @@
 import { useContext } from "react";
+
 import { CartContext } from "../../state";
 import "../../styles/NavBar.css";
 

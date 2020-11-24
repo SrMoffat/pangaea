@@ -1,32 +1,12 @@
 import { useContext } from "react";
 import { CartContext } from "../../state";
+import { productImageStyles, productNameStyles, addCartButtonStyles } from "./productStyles";
 
 
 const Product = (props) => {
-    const { state: { cart }, dispatch } = useContext(CartContext);
-    const currency = "KES"
+    const { dispatch } = useContext(CartContext);
     const { product, setShowDrawer } = props;
     const { title, image_url, price } = product;
-    const productImageStyles = {
-        width: 100,
-        height: 200
-    };
-    const productNameStyles = {
-        marginTop: 5,
-        marginBottom: 20
-    };
-    const addCartButtonStyles = {
-        outline: "none",
-        userSelect: "none",
-        padding: 15,
-        border: "none",
-        backgroundColor: "rgb(75, 85, 72)",
-        color: "#ffffff",
-        cursor: "pointer",
-        minWidth: 200,
-        minHeight: 52,
-        justifySelf: "end",
-    }; 
     const handleAddToCart = () => {
         const selectedItem = { ...product };
         setShowDrawer(true);
@@ -35,8 +15,6 @@ const Product = (props) => {
             payload: selectedItem
         });
     };
-    console.log("STATE", cart);
-
     return (
         <div>
           <img style={productImageStyles} alt="product-image" className="product-image" src={image_url} />
