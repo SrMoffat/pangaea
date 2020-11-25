@@ -5,7 +5,7 @@ import "../../styles/Drawer.css";
 
 const SideDrawer = (props) => {
     const { state: { currencies } } = useContext(CurrencyContext);
-    const { state: { cart } } = useContext(CartContext);
+    const { state: { cart, items } } = useContext(CartContext);
     const { setShowDrawer } = props;
     const calculateSubTotal = cart => {
         const priceReducer = (accumulator, currentValue) => accumulator + currentValue;
@@ -19,7 +19,7 @@ const SideDrawer = (props) => {
                     <p className="drawer-title">Your Cart</p>
                     <div style={{ justifySelf: "end" }}>
                         <img className="cart" alt="cart" src="../../../cart.png" />
-                        <span className="cart-item-count">{cart && cart.length}</span>
+                        <span className="cart-item-count">{ cart && cart.length }</span>
                     </div>
                 </div>
                 <select className="currency-selection" name="currency-selection">
@@ -30,14 +30,14 @@ const SideDrawer = (props) => {
                     }
                 </select>
                 {
-                    cart && cart.map(({ title, price, image_url }, index) => (
+                    items && items.map(({ title, price, image_url, quantity }, index) => (
                         <div className="checkout-product" key={`${index}-checkout-product`}>
                             <div className="checkout-product-details">
                                 <div className="checkout-product-name">{ title }</div>
                                 <div className="checkout-product-meta">Dry | 25-34</div>
                                 <div className="quantity-control">
                                     <div>-</div>
-                                    <div>2</div>
+                                    <div>{ quantity }</div>
                                     <div>+</div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@ const SideDrawer = (props) => {
                 <div className="checkout-section">
                     <div className="total">
                         <div className="subtotal-title">Subtotal</div>
-                        <div className="subtotal-amount">AMD {`${calculateSubTotal(cart)}.00`}</div>
+                        <div className="subtotal-amount">{`${calculateSubTotal(cart)}.00`}</div>
                     </div>
                     <button className="checkout-button">Proceed To Checkout</button>
                 </div>
