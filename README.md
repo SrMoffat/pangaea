@@ -11,11 +11,13 @@ This project is a medium fidelity clone of the [Lumin Site's](https://store.lumi
 ### Setup 
 1. Clone the repository
 `git clone https://github.com/SrMoffat/pangaea.git`
-2. Install dependencies
+2. Move into the project director
+`cd pangaea`
+3. Install dependencies
 `yarn install` or `npm install`
-3. Start the app
+4. Start the app
 `yarn start` or `npm start`
-4. Visit http://localhost:3000/
+5. Visit http://localhost:3000/
 
 ### Project requirements
 - [x] Should query from this [GraphQL API](https://pangaea-interviews.now.sh/api/graphql)
