@@ -140,6 +140,7 @@
 }
 .quantity-control-button {
     cursor: pointer;
+    user-select: none;
 }
 .mask {
     background-color: rgba(150, 150, 150, 0.95);

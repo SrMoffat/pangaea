@@ -32,6 +32,8 @@ const checkIfItemInCart = (cart, item, items) => {
         return [...cart, originalItem];
     }
 };
+const checkProductIds = (item, productId) => (Number(item.id) === Number(productId));
+const checkProductIdsNoMatch = (item, productId) => (Number(item.id) !== Number(productId));
 
 export const getQuantity = cart => {
     const counts = {};
@@ -69,7 +71,7 @@ export const CartReducer = (state, action) => {
         case "INCREMENT_ITEM":
             const { items, cart: userCart } = state;
             const counts = getQuantity(userCart);
-            const itemIndex = items.findIndex(item => Number(item.id) === Number(payload));
+            const itemIndex = items.findIndex(item => checkProductIds(item, payload));
             const newItems = [ ...items ];
             const updatedItem = {
                 ...items[itemIndex],
@@ -84,12 +86,12 @@ export const CartReducer = (state, action) => {
         case "DECREMENT_ITEM":
             const { items: itemState, cart: usersCart } = state;
             const countsObj = getQuantity(usersCart);
-            const itemPosition = itemState.findIndex(item => Number(item.id) === Number(payload));
+            const itemPosition = itemState.findIndex(item => checkProductIds(item, payload));
             const itemsCopy = [ ...itemState ];
-            const some = usersCart.filter(item => Number(item.id) === Number(payload));
+            const some = usersCart.filter(item => checkProductIds(item, payload));
             if(some.length < 2){
-                const itemsUpdate = itemState.filter(({ id }) => Number(id) !== Number(payload));
-                const cartUpdate = usersCart.filter(({ id }) => Number(id) !== Number(payload));
+                const itemsUpdate = itemState.filter(item => checkProductIdsNoMatch(item, payload));
+                const cartUpdate = usersCart.filter(item => checkProductIdsNoMatch(item, payload));
                 return {
                     items: itemsUpdate,
                     cart: cartUpdate
@@ -100,12 +102,47 @@ export const CartReducer = (state, action) => {
                     quantity: Number(countsObj[itemsCopy[itemPosition]['title']]) - 1,
                 };
                 itemsCopy[itemPosition] = updateItem;
-                usersCart.splice(usersCart.findIndex(item => Number(item.id) === Number(payload)), 1);
+                usersCart.splice(usersCart.findIndex(item => checkProductIds(item, payload)), 1);
                 const newItemsStates = {
                     items: itemsCopy,
                     cart: usersCart,
                 };
                 return newItemsStates;
+            }
+        case "UPDATE_CART_WITH_NEW_CURRENCY":
+            const { items: currencyItems, cart: currencyCart } = state;
+            if(payload){
+                const newPrices = payload.map(({ id, price }) => ({ id, price }));
+                const currencyItemsNewPrices = currencyItems.map(({ id: itemsId }) => (newPrices.filter(item => checkProductIds(item, itemsId)))).flat();
+                const itemsCopy = [...currencyItems];
+                const updatedItems = itemsCopy.map((item => {
+                    return currencyItemsNewPrices.map((price => {
+                        if(Number(price.id) === Number(item.id)){
+                            const updated = {
+                                ...item,
+                                price: price.price,
+                            };
+                            return updated
+                        };
+                    }));
+                })).flat().filter(item => item !== undefined);
+                const currencyCartNewPrices = [...new Set(currencyCart.map(({ id: itemsId }) => (newPrices.filter(item => checkProductIds(item, itemsId)))).flat())];
+                const cartCopy = [...currencyCart];
+                const updatedCart = cartCopy.map((item => {
+                    return currencyCartNewPrices.map((price => {
+                        if(Number(price.id) === Number(item.id)){
+                            const updated = {
+                                ...item,
+                                price: price.price,
+                            };
+                            return updated
+                        };
+                    }));
+                })).flat().filter(item => item !== undefined);
+                return {
+                    items: updatedItems,
+                    cart: updatedCart
+                };
             }
         default:
             return state;

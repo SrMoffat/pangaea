@@ -17,6 +17,12 @@ export const ProductsReducer = (state, action) => {
                 products: payload
             };
             return newState;
+        case "REFETCH_PRODUCTS":
+            const productsState = {
+                ...state,
+                products: payload
+            };
+            return productsState;
         default:
             return state;
     };

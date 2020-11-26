@@ -1,13 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect } from "react";
+import { useQuery } from "@apollo/client";
 import { CurrencyContext, CartContext } from "../../state";
 import { getQuantity } from "../../state/cart";
+import { dynamicFetchProductsQuery } from "../../graphql/queries";
 import "../../styles/Drawer.css";
 
 
 const SideDrawer = (props) => {
-    const { state: { currencies } } = useContext(CurrencyContext);
+    const { state: { currencies, current }, dispatch: dispatchCurrenctCurrency } = useContext(CurrencyContext);
+    const { data, refetch } = useQuery(dynamicFetchProductsQuery(current));
     const { state: { cart, items }, dispatch } = useContext(CartContext);
-    const [currency, setCurrency] = useState("USD");
     const { setShowDrawer } = props;
     const calculateSubTotal = cart => {
         const priceReducer = (accumulator, currentValue) => accumulator + currentValue;
@@ -26,9 +28,20 @@ const SideDrawer = (props) => {
         });
     };
     const handleCurrencyChange = event => {
-        setCurrency(event.target.value);
-        // TODO: Refetch products and update context
+        dispatchCurrenctCurrency({
+            type: "SET_CURRENT_CURRENCY",
+            payload: event.target.value
+        });
     };
+    useEffect(() => {
+        refetch();
+    }, [current, refetch]);
+    useEffect(() => {
+        dispatch({
+            type: "UPDATE_CART_WITH_NEW_CURRENCY",
+            payload: data && data.products
+        });
+    }, [data, dispatch]);
     const count = getQuantity(cart);
     return (
         <div>
@@ -61,7 +74,7 @@ const SideDrawer = (props) => {
                                 </div>
                             </div>
                             <div className="checkout-produxt-price">
-                                <div>{`${currency} ${price}`}</div>
+                                <div>{`${current} ${price}`}</div>
                             </div>
                             <div>
                                 <img className="checkout-product-image" alt="checkout-product" src={image_url} />
@@ -75,7 +88,7 @@ const SideDrawer = (props) => {
                 <div className="checkout-section">
                     <div className="total">
                         <div className="subtotal-title">Subtotal</div>
-                        <div className="subtotal-amount">{`${currency}${" "}${calculateSubTotal(cart)}.00`}</div>
+                        <div className="subtotal-amount">{`${current}${" "}${calculateSubTotal(cart)}.00`}</div>
                     </div>
                     <button className="checkout-button">Proceed To Checkout</button>
                 </div>

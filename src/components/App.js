@@ -7,19 +7,17 @@ import FilterSection from "./FilterSection";
 import SideDrawer from "./Drawer";
 import Footer from "./Footer";
 
-import { fetchProductsQuery, fetchCurrencyQuery } from "../graphql/queries";
-
+import { fetchCurrencyQuery, dynamicFetchProductsQuery } from "../graphql/queries";
 import { ProductsContext, CurrencyContext } from "../state";
-
 
 import '../styles/App.css';
 
 function App() {
-  const { loading, data } = useQuery(fetchProductsQuery);
   const { loading: currencyLoading, data: currencyData } = useQuery(fetchCurrencyQuery);
   const [showDrawer, setShowDrawer] = useState();
-  const { state, dispatch } = useContext(ProductsContext);
-  const { state: currencyState, dispatch: currencyDispatch } = useContext(CurrencyContext);
+  const { dispatch } = useContext(ProductsContext);
+  const { dispatch: currencyDispatch, state: { current } } = useContext(CurrencyContext);
+  const { loading, data } = useQuery(dynamicFetchProductsQuery(current));
   const products = data && data.products;
   const currencies = currencyData && currencyData.currency;
   useEffect(() => {

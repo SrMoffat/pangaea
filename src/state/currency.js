@@ -1,7 +1,8 @@
 import { createContext, useReducer } from "react";
 
 export const CurrencyInitialState = {
-    currencies: []
+    currencies: [],
+    current: "USD"
 };
 
 export const CurrencyContext = createContext({
@@ -17,6 +18,12 @@ export const CurrencyReducer = (state, action) => {
                 currencies: payload
             };
             return newState;
+        case "SET_CURRENT_CURRENCY":
+            const newCurrency = {
+                ...state,
+                current: payload
+            };
+            return newCurrency;
         default:
             return state;
     };

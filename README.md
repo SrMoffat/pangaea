@@ -27,9 +27,9 @@ This project is a medium fidelity clone of the [Lumin Site's](https://store.lumi
 - [x] If the item already exists it should increment the quantity
 - [x] It should sum the items in the cart 
 - [x] Clicking the + button will increase the quantity
-- [x] For screens `> 768px` show grid of `3 items` for `< 768px` show `2 items` (bug with my css requires page reload)
+- [x] For screens `> 768px` show grid of `3 items` for `< 768px` show `2 items` [bug with my css](https://github.com/SrMoffat/pangaea/blob/2044ebb97ca9325c2ccc94605f71ae304a89efd7/src/components/ProductSection/productSectionStyles.js#L1) requires page reload
 - [x] Clicking the - button will decrease the quantity
 - [x] If the quantity is 1 and the "-" button is pressed it should remove the item
-- [] In the top left there is a currency select, doing so should requery the GraphQL api with a new currency and update the prices
-- [] It should display the sum of items in the correct selected currency
+- [x] In the top left there is a currency select, doing so should requery the GraphQL api with a new currency and update the prices
+- [x] It should display the sum of items in the correct selected currency
 
