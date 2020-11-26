@@ -148,3 +148,9 @@
     position: fixed;
     top: 0;
 }
+.empty-cart {
+    margin: auto;
+}
+.empty-cart-text {
+    font-size: 11px;
+}

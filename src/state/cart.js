@@ -33,7 +33,7 @@ const checkIfItemInCart = (cart, item, items) => {
     }
 };
 
-const getQuantity = cart => {
+export const getQuantity = cart => {
     const counts = {};
     const productNames = cart.map(({ title }) => title);
     for (let i = 0; i < productNames.length; i++){

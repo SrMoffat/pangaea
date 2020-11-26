@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { CurrencyContext, CartContext } from "../../state";
+import { getQuantity } from "../../state/cart";
 import "../../styles/Drawer.css";
 
 
@@ -28,9 +29,7 @@ const SideDrawer = (props) => {
         setCurrency(event.target.value);
         // TODO: Refetch products and update context
     };
-    
-
-
+    const count = getQuantity(cart);
     return (
         <div>
             <div className="drawer" style={{ zIndex: 99 }}>
@@ -57,7 +56,7 @@ const SideDrawer = (props) => {
                                 <div className="checkout-product-meta">Dry | 25-34</div>
                                 <div className="quantity-control">
                                     <div id={id} className="quantity-control-button" onClick={handleDecrementProduct}>-</div>
-                                    <div>{ quantity }</div>
+                                    <div>{ quantity || count[title] }</div>
                                     <div id={id} className="quantity-control-button" onClick={handleIncrementProduct}>+</div>
                                 </div>
                             </div>
@@ -69,6 +68,9 @@ const SideDrawer = (props) => {
                             </div>
                         </div>
                     ))
+                }
+                {
+                    items.length === 0 && <img className="empty-cart" alt="empty-cart" src={"../../../empty-cart.svg"}/>
                 }
                 <div className="checkout-section">
                     <div className="total">
