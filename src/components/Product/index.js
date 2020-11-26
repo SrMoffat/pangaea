@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { CartContext } from "../../state";
 import { productImageStyles, productNameStyles, addCartButtonStyles } from "./productStyles";
 
+
+
 const Product = (props) => {
     const { dispatch } = useContext(CartContext);
     const { product, setShowDrawer } = props;

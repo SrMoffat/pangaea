@@ -22,3 +22,12 @@
     border: 1px solid #dedede;
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+    .filter-section {
+        display: grid;
+        grid-template-columns: 280px 280px;
+        grid-template-rows: 300px 300px; 
+        grid-gap: 10px;
+    }    
+}

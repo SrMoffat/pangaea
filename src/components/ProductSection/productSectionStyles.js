@@ -2,6 +2,7 @@
  * This should be a CSS file, for a reason styles are not loading on this page.
  * TODO: Look into this
  */
+const change = window.innerWidth < 768;
 export const productSectionStyles = {
     backgroundColor: "#f5f5f5", 
     height: 500, 
@@ -11,7 +12,6 @@ export const productSectionStyles = {
 };
 export const productsContainerStyles = {
     display: "grid",
-    gridTemplateColumns: "1fr 1fr 1fr",
+    gridTemplateColumns: `${change ? "1fr 1fr" : "1fr 1fr 1fr"}`,
     gridGap: "40px",
-
 };

@@ -1,28 +1,6 @@
 import "../../styles/FilterSection.css";
 
 const FilterSection = () => {
-    // const captionOptions = {
-    //     all: {
-    //         text: "All Products",
-    //         caption: "A 360° look at Lumin"
-    //     },
-    //     new: {
-    //         text: "New Products",
-    //         caption: "Brand new upgrades for your routine"
-    //     },
-    //     sets: {
-    //         text: "Sets",
-    //         caption: "Find your perfect routine"
-    //     },
-    //     skin: {
-    //         text: "Skincare",
-    //         caption: "Unlock your full face potential"
-    //     },
-    //     hair: {
-    //         text: "Hair & Body Care",
-    //         caption: "Lather up with the good stuff"
-    //     }
-    // };
     return (
         <div className="filter-section">
             <div className="page-caption">

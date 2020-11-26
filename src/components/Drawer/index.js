@@ -1,16 +1,36 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CurrencyContext, CartContext } from "../../state";
 import "../../styles/Drawer.css";
 
 
 const SideDrawer = (props) => {
     const { state: { currencies } } = useContext(CurrencyContext);
-    const { state: { cart, items } } = useContext(CartContext);
+    const { state: { cart, items }, dispatch } = useContext(CartContext);
+    const [currency, setCurrency] = useState("USD");
     const { setShowDrawer } = props;
     const calculateSubTotal = cart => {
         const priceReducer = (accumulator, currentValue) => accumulator + currentValue;
-        return (cart.map(({price}) => price)).reduce(priceReducer, 0);
+        return cart.map(({ price }) => price).reduce(priceReducer, 0);
     };
+    const handleIncrementProduct = event => {
+        dispatch({
+            type: "INCREMENT_ITEM",
+            payload: event.target.id
+        });
+    };
+    const handleDecrementProduct = event => {
+        dispatch({
+            type: "DECREMENT_ITEM",
+            payload: event.target.id
+        });
+    };
+    const handleCurrencyChange = event => {
+        setCurrency(event.target.value);
+        // TODO: Refetch products and update context
+    };
+    
+
+
     return (
         <div>
             <div className="drawer" style={{ zIndex: 99 }}>
@@ -22,7 +42,7 @@ const SideDrawer = (props) => {
                         <span className="cart-item-count">{ cart && cart.length }</span>
                     </div>
                 </div>
-                <select className="currency-selection" name="currency-selection">
+                <select onChange={handleCurrencyChange} className="currency-selection" name="currency-selection">
                     {
                         currencies && currencies.map((currency, index) => (
                             <option key={`${currency}-${index}`} value={currency}>{currency}</option>
@@ -30,19 +50,19 @@ const SideDrawer = (props) => {
                     }
                 </select>
                 {
-                    items && items.map(({ title, price, image_url, quantity }, index) => (
+                    items && items.map(({ id, title, price, image_url, quantity }, index) => (
                         <div className="checkout-product" key={`${index}-checkout-product`}>
                             <div className="checkout-product-details">
                                 <div className="checkout-product-name">{ title }</div>
                                 <div className="checkout-product-meta">Dry | 25-34</div>
                                 <div className="quantity-control">
-                                    <div>-</div>
+                                    <div id={id} className="quantity-control-button" onClick={handleDecrementProduct}>-</div>
                                     <div>{ quantity }</div>
-                                    <div>+</div>
+                                    <div id={id} className="quantity-control-button" onClick={handleIncrementProduct}>+</div>
                                 </div>
                             </div>
                             <div className="checkout-produxt-price">
-                                <div>{`AMD ${price}`}</div>
+                                <div>{`${currency} ${price}`}</div>
                             </div>
                             <div>
                                 <img className="checkout-product-image" alt="checkout-product" src={image_url} />
@@ -53,14 +73,12 @@ const SideDrawer = (props) => {
                 <div className="checkout-section">
                     <div className="total">
                         <div className="subtotal-title">Subtotal</div>
-                        <div className="subtotal-amount">{`${calculateSubTotal(cart)}.00`}</div>
+                        <div className="subtotal-amount">{`${currency}${" "}${calculateSubTotal(cart)}.00`}</div>
                     </div>
                     <button className="checkout-button">Proceed To Checkout</button>
                 </div>
             </div>
-            <div style={{ backgroundColor: "rgba(150, 150, 150, 0.95)", height: "100vh", width: "100vw", position: "fixed", top: 0 }}>
-            .
-            </div>
+            <div className="mask">.</div>
         
         </div>
     );
