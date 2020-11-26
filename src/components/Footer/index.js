@@ -10,7 +10,7 @@ const Footer = () => {
                 <h4 style={{ marginTop: 10 }}> Need help?</h4>
                 <p>Contact us through our Support Concierge</p>
                 <p>Or email us at support@luminskin.com</p>
-                <p>© {`${(new Date).getFullYear()}`}, Lumin</p>
+                <p>© {`${(new Date()).getFullYear()}`}, Lumin</p>
             </div>
             <div>
                 <h2>Shop</h2>
