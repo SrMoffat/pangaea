@@ -4,6 +4,9 @@ A recreation of luminskin.com product page and cart using a GraphQL API and a Re
 ### Project Context
 This project is a medium fidelity clone of the [Lumin Site's](https://store.luminskin.com/products) product page
 
+### Staging Environment
+You can interact with the version hosted on Heroku [here](https://pangaea-gitau.herokuapp.com/)
+
 ### Requirements to Setup
 1. [Node](https://nodejs.org/en/download/) which comes with [NPM](https://www.npmjs.com/package/npm) 
 2. If you want to use `Yarn` instead of `NPM`, follow these instructions for respective OS [Yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable)
